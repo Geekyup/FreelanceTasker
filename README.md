@@ -21,3 +21,9 @@
 
 ## Как запустить проект локально
 
+- git clone https://github.com/Geekyup/FreelanceTasker.git
+- cd FreelanceTasker
+- pip install django
+- python manage.py migrate
+- python manage.py runserver
+
