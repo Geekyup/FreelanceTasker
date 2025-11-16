@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>FreelanceTasker — Управление проектами</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <style>
+        html, body {
+            height: 100%;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1 0 auto;
+        }
+        footer {
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Пример навигации -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">FreelanceTasker</a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a href="{% url 'index' %}" class="nav-link active">Главная</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'projects' %}">Проекты</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Задачи</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a href="{% url 'profile' %}" class="nav-link">Профиль</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a href="{% url 'login' %}" class="nav-link">Войти</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+    
+    <main>
+      <div class="container mt-5">
+        {% block content %}
+        <div class="py-5 text-center">
+            <h1>FreelanceTasker</h1>
+            <p class="lead">Платформа для управления проектами и задачами фриланс-команд</p>
+            <a href="{% url 'create_project' %}" class="btn btn-primary btn-lg">Создать проект</a>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Управление проектами</h3>
+                <p>Создавайте и управляйте проектами, назначайте задачи, отслеживайте прогресс вашей команды.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>Гибкая коммуникация</h3>
+                <p>Оставляйте комментарии, получайте уведомления и общайтесь по каждому проекту и задаче.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>Отчётность и экспорт</h3>
+                <p>Смотрите статистику по проектам, экспортируйте задачи в CSV для анализа.</p>
+            </div>
+        </div>
+        {% endblock %}
+      </div>
+    </main>
+
+    <footer class="bg-dark text-light text-center py-3">
+        &copy; FreelanceTasker — Есть все доступные права 
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

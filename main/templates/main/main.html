@@ -1,0 +1,17 @@
+{% extends 'main/index.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">
+        {% if edit %}Редактировать проект{% else %}Создать новый проект{% endif %}
+    </h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">
+            {% if edit %}Сохранить изменения{% else %}Создать проект{% endif %}
+        </button>
+        <a href="{% url 'index' %}" class="btn btn-secondary ms-2">Отмена</a>
+    </form>
+</div>
+{% endblock %}

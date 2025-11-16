@@ -1,0 +1,29 @@
+{% extends 'main/index.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Список проектов</h2>
+    {% if projects %}
+        <div class="row">
+            {% for project in projects %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ project.title }}</h5>
+                            <p class="card-text">{{ project.description|truncatewords:20 }}</p>
+                            <p class="card-text"><small class="text-muted">Дедлайн: {{ project.deadline }}</small></p>
+                            <a href="{% url 'edit_project' project.pk %}" class="btn btn-warning btn-sm mt-2">Редактировать</a>
+                            <form method="post" action="{% url 'delete_project' project.pk %}" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm mt-2">Удалить</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info">Проектов пока нет.</div>
+    {% endif %}
+</div>
+{% endblock %}

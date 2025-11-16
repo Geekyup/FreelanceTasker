@@ -1,0 +1,18 @@
+{% extends 'main/index.html' %}
+
+{% block content %}
+<div class="container mt-5" style="max-width: 500px;">
+    <h2 class="mb-4">Профиль пользователя</h2>
+    <div class="card p-4 shadow-sm">
+        <p><strong>Ник:</strong> {{ user.username }}</p>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-secondary w-100 mb-2">Выйти из аккаунта</button>
+        </form>
+        <form method="post" action="{% url 'delete_account' %}" onsubmit="return confirm('Вы уверены, что хотите удалить аккаунт? Это действие необратимо!');">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger w-100">Удалить аккаунт</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
